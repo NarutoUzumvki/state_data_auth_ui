@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Key</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background: #ffffff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        #api_key {
+            word-wrap: break-word;
+            font-family: monospace;
+            color: #333333;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            padding: 10px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        button {
+            margin-top: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .icon {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, {{ username }}</h1>
+        <h2>Your API Key:</h2>
+        <p id="api_key">{{ api_key }}</p>
+        <button onclick="copyApiKey()" id="copyButton">
+            <span class="icon">&#x1f4cb;</span> Copy
+        </button>
+    </div>
+
+    <script>
+        function copyApiKey() {
+            var apiKey = document.getElementById("api_key").textContent;
+            navigator.clipboard.writeText(apiKey).then(function() {
+                var button = document.getElementById("copyButton");
+                button.innerHTML = '<span class="icon">&#10003;</span> Copied';
+                setTimeout(function() {
+                    button.innerHTML = '<span class="icon">&#x1f4cb;</span> Copy';
+                }, 3000);
+            }, function(err) {
+                console.error('Could not copy text: ', err);
+            });
+        }
+    </script>
+</body>
+</html>

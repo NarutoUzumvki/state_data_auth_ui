@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9; /* light grayish background */
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background: #ffffff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            width: 300px; /* fixed width */
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input, button {
+            margin-top: 8px;
+            margin-bottom: 8px;
+            padding: 10px;
+            width: 100%; /* full width within the container */
+            box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+        }
+        button {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        label {
+            font-weight: bold;
+            text-align: left;
+        }
+        .signin-prompt {
+            margin-top: 10px;
+        }
+        h1 {
+            color: #333;
+        }
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        p.error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sign Up</h1>
+        <form action="/signup" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <label for="confirm_password">Confirm Password:</label>
+            <input type="password" id="confirm_password" name="confirm_password" required>
+            <button type="submit">Sign Up</button>
+        </form>
+        {% if not username %}
+        <div class="signin-prompt">
+            Already have an account? <a href="/signin">Sign In</a>
+        </div>
+        {% else %}
+        <div class="signin-prompt">
+            <p class="error">Username '{{ username }}' already exists. <a href="/signin">Sign In</a>.</p>
+        </div>
+        {% endif %}
+        {% if error %}
+        <div class="error-prompt">
+            <p class="error"> {{ error }} </p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
